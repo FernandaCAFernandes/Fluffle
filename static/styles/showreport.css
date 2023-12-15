@@ -1,0 +1,14 @@
+.sweetviz-button {
+    background-color: #015564;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    margin-top: 20px; /* Adjust the margin as needed */
+    text-align: center; /* Center the text */
+    line-height: 1; /* Ensure the text is centered vertically */
+}

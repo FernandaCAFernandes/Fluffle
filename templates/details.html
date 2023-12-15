@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/details.css') }}">
+    <title>Fluffle - Detalhamento do BD</title>
+</head>
+<body>
+    <button type="button" style="width: 144px;" onclick="window.location.href='{{ url_for('index')}}'">
+        Voltar
+    </button>
+
+    <div class="center-container">        
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='icons/fluffle-logo-removebg-preview.png') }}">
+            <img src="{{ url_for('static', filename='icons/bunnie-bottom-page.gif') }}" width="200" height="200">
+        </div>
+    </div>
+
+
+    <!-- Dropdown to select table options -->
+    <label for="tableOptions">Select Table View Option:</label>
+    <select id="tableOptions" onchange="showTableOption()">
+        <option value="fullContent">Full Content</option>
+        <option value="head">Head()</option>
+        <option value="tail">Tail()</option>
+        <option value="info">Info()</option>
+        <option value="describe">Describe()</option>
+        <option value="isnullSum">IsNull().Sum()</option>
+    </select>
+    
+    <!-- Container for Full Content table -->
+    <div id="fullContentTable" class="table-container">
+        <h2>Full Content</h2>
+        {% if data is defined and data is not none %}
+            {% if not data.empty %}
+                <table border="1">
+                    <tr>
+                        {% for column in data.columns %}
+                        <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for index, row in data.iterrows() %}
+                    <tr>
+                        {% for value in row %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No data available for Full Content.</p>
+            {% endif %}
+        {% else %}
+            <p>No data available for Full Content.</p>
+        {% endif %}
+    </div>
+
+    <!-- Container for Head table -->
+    <div id="headTable" class="table-container" style="display: none;">
+        <h2>Head</h2>
+        {% if head_df is defined and head_df is not none %}
+            {% if not head_df.empty %}
+                <table border="1">
+                    <tr>
+                        {% for column in head_df.columns %}
+                        <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for index, row in head_df.iterrows() %}
+                    <tr>
+                        {% for value in row %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No data available for Head().</p>
+            {% endif %}
+        {% else %}
+            <p>No data available for Head().</p>
+        {% endif %}
+    </div>
+
+    <!-- Container for Tail table -->
+    <div id="tailTable" class="table-container" style="display: none;">
+        <h2>Tail</h2>
+        {% if tail_df is defined and tail_df is not none %}
+            {% if not tail_df.empty %}
+                <table border="1">
+                    <tr>
+                        {% for column in tail_df.columns %}
+                        <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for index, row in tail_df.iterrows() %}
+                    <tr>
+                        {% for value in row %}
+                        <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No data available for Tail().</p>
+            {% endif %}
+        {% else %}
+            <p>No data available for Tail().</p>
+        {% endif %}
+    </div>
+
+    <!-- Container for Info table -->
+    <div id="infoTable" class="table-container" style="display: none;">
+        <h2>Info</h2>
+        {% if info_output %}
+            <pre>{{ info_output }}</pre>
+        {% else %}
+            <p>No data available for Info.</p>
+        {% endif %}
+    </div>
+
+    <!-- Container for Describe table -->
+    <div id="describeTable" class="table-container" style="display: none;">
+        <h2>Describe</h2>
+        {% if desc_df is defined and desc_df is not none %}
+            {% if not desc_df.empty %}
+                <table border="1">
+                    <tr>
+                        <th>index</th>
+                        {% for column in desc_df.columns %}
+                            <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for index, row in desc_df.iterrows() %}
+                        <tr>
+                            <td>{{ index }}</td> 
+                            {% for value in row %}
+                                <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No data available for Describe().</p>
+            {% endif %}
+        {% else %}
+            <p>No data available for Describe().</p>
+        {% endif %}
+    </div>
+
+    <!-- Container for IsNullSum table -->
+    <div id="isnullsumTable" class="table-container" style="display: none;">
+        <h2>IsNullSum</h2>
+        {% if isnull_sum_output %}
+            <pre>{{ isnull_sum_output}}</pre>
+        {% else %}
+            <p>No data available for isnull().sum().</p>
+        {% endif %}
+    </div>
+
+
+    <!-- Other table options can be similarly added -->
+    
+    <script>
+        function showTableOption() {
+            var selectedOption = document.getElementById("tableOptions").value;
+    
+            // Hide all table containers
+            var tableContainers = document.getElementsByClassName("table-container");
+            for (var i = 0; i < tableContainers.length; i++) {
+                tableContainers[i].style.display = "none";
+            }
+    
+            // Show the selected table container
+            document.getElementById(selectedOption + "Table").style.display = "block";
+        }
+    </script>
+    
+    </body>
+</html>

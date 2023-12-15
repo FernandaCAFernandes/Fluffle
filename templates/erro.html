@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fluffle - Err</title>
+</head>
+<body>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/error.css') }}">
+    <div class="center-container">
+        <img src="{{ url_for('static', filename='icons/bunnie-error.gif') }}"  width="300" height="300">
+        <div class="error-message">
+            <h1>Algo deu errado</h1>
+            <p>Encontramos um erro ao processar a sua solicitação.</p>
+            <p>{{ error_message}}</p>
+        </div>
+        <button class="error-button" onclick="goToInitialPage()">Ir para a Página Inicial</button>
+    </div>
+
+    <script>
+        function goToInitialPage() {
+            // Redirect to the initial page
+            window.location.href = "/";
+        }
+    </script>
+
+</body>
+</html>

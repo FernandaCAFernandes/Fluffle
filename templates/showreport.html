@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fluffle - Index</title>
+</head>
+<body>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/showreport.css') }}">
+    <button type="button" style="width: 144px;" onclick="window.location.href='{{ url_for('index')}}'">
+        Voltar
+    </button>
+
+    <link rel="stylesheet" href="../static/styles/dbsetup.css"/>
+    <div class="center-container">        
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='icons/fluffle-logo-removebg-preview.png') }}">
+            <img src="{{ url_for('static', filename='icons/bunnie-bottom-page.gif') }}" width="200" height="200">
+        </div>
+    </div>
+
+    <a href="/show_sv/{{ schemaname }}/{{ tablename }}" class="sweetviz-button">Abrir Sweetviz Report</a>
+</body>
+</html>

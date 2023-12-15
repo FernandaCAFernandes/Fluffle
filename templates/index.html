@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fluffle - Index</title>
+</head>
+<body>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+    <button type="button" style="width: 144px;" onclick="window.location.href='{{ url_for('dbsetup')}}'">
+        Voltar
+    </button>
+
+    <link rel="stylesheet" href="../static/styles/dbsetup.css"/>
+    <div class="center-container">        
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='icons/fluffle-logo-removebg-preview.png') }}">
+            <img src="{{ url_for('static', filename='icons/bunnie-bottom-page.gif') }}" width="200" height="200">
+        </div>
+    </div>
+<!--
+      <form action="/add" method="POST">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+        <br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br><br>
+        <button type="submit">Adicionar</button>
+    </form>
+-->
+    <table border="1">
+        <tr>
+            <th>Schema Name</th>
+            <th>Tabel Name</th>
+            <th>Column Count</th>
+            <th>Total Size</th>
+            <th>Total Size Pretty</th>
+            <th>Operations</th>
+        </tr>
+        {% for record in records %}
+        <tr>
+            <td>{{ record[0] }}</td>
+            <td>{{ record[1] }}</td>
+            <td>{{ record[2] }}</td>
+            <td>{{ record[3] }}</td>
+            <td>{{ record[4] }}</td>
+            <td>
+                <a href="/details/{{ record[0] }}/{{ record[1] }}">Details</a>
+                <a href="/insert/{{ record[0] }}/{{ record[1] }}">Insert</a>
+                <a href="/mainsweetvizpage/{{ record[0] }}/{{ record[1] }}">Report</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
